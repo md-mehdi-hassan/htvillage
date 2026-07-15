@@ -162,6 +162,16 @@ html[data-theme='light'] #featured .text-white\/55 {
   color: #ffffff !important;
 }
 
+/* Keep projects strip card titles white on image overlays */
+html[data-theme='light'] #innovation [data-project-card] .text-white {
+  color: #ffffff !important;
+}
+
+/* Keep ecosystem card titles white on image overlays */
+html[data-theme='light'] #ecosystem [data-eco-label] {
+  color: #ffffff !important;
+}
+
 html[data-theme='light'] #featured .bg-white {
   background-color: #ffffff !important;
 }

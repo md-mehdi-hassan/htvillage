@@ -81,6 +81,8 @@ export const hero = {
 export const featured = {
   id: 'featured',
   eyebrow: 'FEATURED PROJECTS',
+  /** Continuous background (YouTube id) */
+  backgroundVideoId: 'cpbU0qMlIWk',
   slides: [
     {
       id: 'masterplan',

@@ -29,8 +29,8 @@ export default function Hero() {
 
     const targetScale = () => {
       const w = media.offsetWidth || 1
-      // Grow inset frame toward near full-bleed (matches reference video)
-      return Math.min(1.55, Math.max(1.28, (window.innerWidth * 0.94) / w))
+      // Full viewport bleed (slight overshoot kills subpixel side slits)
+      return (window.innerWidth / w) * 1.02
     }
 
     const ctx = gsap.context(() => {
@@ -134,7 +134,7 @@ export default function Hero() {
     <section
       id="hero"
       ref={rootRef}
-      className="relative z-10 bg-ink-950 min-h-screen section-pad pt-28 pb-16 flex flex-col"
+      className="relative z-10 bg-ink-950 min-h-screen section-pad pt-28 pb-16 flex flex-col overflow-x-hidden"
     >
       <div
         ref={titleRef}

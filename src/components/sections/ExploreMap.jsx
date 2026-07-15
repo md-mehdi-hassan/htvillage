@@ -124,7 +124,7 @@ export default function ExploreMap() {
         </ScrollReveal>
 
         <ScrollReveal className="mt-10">
-          <h3 className="font-display text-4xl sm:text-6xl font-medium tracking-[0.12em] text-white">
+          <h3 className="font-display text-center text-4xl sm:text-6xl font-medium tracking-[0.12em] text-white">
             {exploreMap.exploreLabel}
           </h3>
         </ScrollReveal>
