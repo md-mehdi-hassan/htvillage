@@ -31,8 +31,8 @@ export default function ExploreMap() {
           </h2>
         </ScrollReveal>
 
-        <ScrollReveal className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-ink-900">
-          <div className="relative aspect-[4/3] sm:aspect-[16/11] bg-[#141820] overflow-hidden rounded-2xl sm:rounded-3xl">
+        <ScrollReveal className="relative mx-auto w-full max-w-6xl lg:max-w-7xl overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-ink-900">
+          <div className="relative aspect-[16/11] sm:aspect-[16/10] lg:aspect-[16/9] bg-[#141820] overflow-hidden rounded-2xl sm:rounded-3xl">
             {exploreMap.backgroundVideo ? (
               <video
                 className="absolute inset-0 h-full w-full object-cover"
