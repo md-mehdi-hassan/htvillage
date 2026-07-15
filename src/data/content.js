@@ -177,8 +177,9 @@ export const projectsStrip = {
 
 export const exploreMap = {
   id: 'workspace',
-  heading: 'PROJECTS',
+  heading: 'LANDSCAPE',
   exploreLabel: 'EXPLORE',
+  backgroundVideo: '/assets/videos/landscape-campus.mp4',
   filters: [
     { id: 'all', label: 'All Locations' },
     { id: 'active', label: 'Project Status' },
@@ -301,7 +302,6 @@ export const footer = {
     { label: 'Instagram', href: '#', icon: 'instagram' },
     { label: 'YouTube', href: '#', icon: 'youtube' },
     { label: 'LinkedIn', href: '#', icon: 'linkedin' },
-    { label: 'TikTok', href: '#', icon: 'tiktok' },
   ],
   whatsapp: 'https://wa.me/8801711000000',
   backToTop: 'Back to top',

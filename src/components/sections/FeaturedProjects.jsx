@@ -120,22 +120,32 @@ export default function FeaturedProjects() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const insetBox = () => {
-      const pad = window.innerWidth < 640 ? 40 : window.innerWidth < 1024 ? 64 : 112
-      const width = Math.min(896, window.innerWidth - pad)
-      const height = width * (3 / 4)
+      const w = window.innerWidth
+      const h = window.innerHeight
+      const pad = w < 640 ? 24 : w < 1024 ? 48 : 112
+      const maxW = w < 640 ? w - pad : w < 1024 ? Math.min(720, w - pad) : Math.min(896, w - pad)
+      const width = Math.max(280, maxW)
+      // Mobile: slightly taller frame so UI fits; tablet/desktop stay 4:3
+      const ratio = w < 640 ? 0.85 : 0.75
+      let height = width * ratio
+      // Keep frame inside viewport with breathing room
+      const maxH = h * (w < 640 ? 0.62 : w < 1024 ? 0.7 : 0.78)
+      if (height > maxH) height = maxH
       return {
         width,
         height,
-        left: (window.innerWidth - width) / 2,
-        top: (window.innerHeight - height) / 2,
+        left: (w - width) / 2,
+        top: (h - height) / 2,
       }
     }
 
     const uiEndScale = () => {
-      // Grow UI with the frame so it doesn't feel tiny when full-bleed
+      const w = window.innerWidth
+      if (w < 640) return 1.06
+      if (w < 1024) return 1.18
       const startW = insetBox().width || 1
-      const ratio = window.innerWidth / startW
-      return Math.min(1.55, Math.max(1.28, 1 + (ratio - 1) * 0.55))
+      const ratio = w / startW
+      return Math.min(1.42, Math.max(1.2, 1 + (ratio - 1) * 0.45))
     }
 
     const applyInset = () => {
@@ -181,12 +191,14 @@ export default function FeaturedProjects() {
         return
       }
 
+      const scrollEnd = window.innerWidth < 768 ? '+=90%' : window.innerWidth < 1024 ? '+=110%' : '+=140%'
+
       const tl = gsap.timeline({
         scrollTrigger: {
           id: 'featured-grow',
           trigger: root,
           start: 'top top',
-          end: '+=140%',
+          end: scrollEnd,
           scrub: 0.85,
           pin: true,
           pinSpacing: true,
@@ -228,10 +240,13 @@ export default function FeaturedProjects() {
     const refresh = () => ScrollTrigger.refresh()
     const t1 = window.setTimeout(refresh, 80)
     const t2 = window.setTimeout(refresh, 400)
+    const onResize = () => refresh()
+    window.addEventListener('resize', onResize)
 
     return () => {
       window.clearTimeout(t1)
       window.clearTimeout(t2)
+      window.removeEventListener('resize', onResize)
       ScrollTrigger.getById('featured-grow')?.kill()
       ctx.revert()
     }
@@ -302,7 +317,7 @@ export default function FeaturedProjects() {
     <section
       id={featured.id}
       ref={rootRef}
-      className="relative z-10 min-h-screen bg-ink-950 overflow-hidden"
+      className="relative z-10 min-h-[100svh] bg-ink-950 overflow-hidden"
     >
       {/* Single frame grows by width/height (not CSS scale) so UI never leaves the video box */}
       <div
@@ -336,29 +351,29 @@ export default function FeaturedProjects() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/25" />
         </div>
 
-        {/* Centered UI band — scales up with scroll so it stays proportional when full-bleed */}
-        <div className="absolute inset-0 z-10 flex items-end justify-center pointer-events-none pb-6 sm:pb-8 lg:pb-10">
+        {/* Centered UI band — scales gently on tablet/desktop; compact on mobile */}
+        <div className="absolute inset-0 z-10 flex items-end justify-center pointer-events-none pb-4 sm:pb-7 lg:pb-10">
           <div
             ref={uiRef}
-            className="pointer-events-auto relative w-full max-w-5xl px-5 sm:px-8 lg:px-10 will-change-transform"
+            className="pointer-events-auto relative w-full max-w-5xl px-4 sm:px-8 lg:px-10 will-change-transform"
           >
-            <div className="relative max-w-xl pr-32 lg:pr-40">
-              <p data-feat-fade className="text-[11px] sm:text-xs tracking-[0.28em] uppercase text-white/80">
+            <div className="relative max-w-xl md:pr-32 lg:pr-40">
+              <p data-feat-fade className="text-[10px] sm:text-[11px] md:text-xs tracking-[0.22em] sm:tracking-[0.28em] uppercase text-white/80">
                 {featured.eyebrow}
               </p>
-              <p data-feat-fade className="mt-2 text-[11px] sm:text-xs tracking-[0.22em] uppercase text-white/55">
+              <p data-feat-fade className="mt-1.5 sm:mt-2 text-[10px] sm:text-[11px] md:text-xs tracking-[0.18em] sm:tracking-[0.22em] uppercase text-white/55">
                 {slide.category}
               </p>
               <h2
                 data-feat-fade
-                className="mt-4 font-display text-3xl sm:text-5xl lg:text-6xl font-medium tracking-wide text-white leading-tight"
+                className="mt-3 sm:mt-4 font-display text-[1.65rem] sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-wide text-white leading-[1.1] break-words"
               >
                 {slide.title}
               </h2>
-              <p data-feat-fade className="mt-3 text-sm sm:text-base text-white/75 font-light">
+              <p data-feat-fade className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-white/75 font-light">
                 {slide.location}
               </p>
-              <div data-feat-fade className="mt-5">
+              <div data-feat-fade className="mt-4 sm:mt-5">
                 <MagneticButton>
                   <a
                     href="#innovation"
@@ -369,11 +384,11 @@ export default function FeaturedProjects() {
                 </MagneticButton>
               </div>
 
-              <div data-feat-fade className="mt-7 flex items-center gap-4">
+              <div data-feat-fade className="mt-5 sm:mt-7 flex items-center gap-3 sm:gap-4">
                 <button
                   type="button"
                   onClick={() => go(-1)}
-                  className="text-white/80 hover:text-white text-xl"
+                  className="text-white/80 hover:text-white text-xl min-h-11 min-w-11 inline-flex items-center justify-center"
                   aria-label="Previous"
                 >
                   ←
@@ -394,7 +409,7 @@ export default function FeaturedProjects() {
                 <button
                   type="button"
                   onClick={() => go(1)}
-                  className="text-white/80 hover:text-white text-xl"
+                  className="text-white/80 hover:text-white text-xl min-h-11 min-w-11 inline-flex items-center justify-center"
                   aria-label="Next"
                 >
                   →
@@ -405,7 +420,7 @@ export default function FeaturedProjects() {
             <div
               ref={insetRef}
               data-feat-inset
-              className="absolute bottom-0 right-5 sm:right-8 lg:right-10 hidden md:block w-36 lg:w-44 aspect-[4/5] overflow-hidden border border-white/10 shadow-2xl shadow-black/50 bg-ink-800"
+              className="absolute bottom-0 right-4 sm:right-8 lg:right-10 hidden md:block w-28 lg:w-40 xl:w-44 aspect-[4/5] overflow-hidden border border-white/10 shadow-2xl shadow-black/50 bg-ink-800"
             >
               {(featured.insetGallery?.length
                 ? featured.insetGallery

@@ -204,11 +204,14 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="hidden sm:flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase text-[var(--page-fg-muted)] hover:text-[var(--nav-fg)] transition-colors"
+                className="flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.16em] sm:tracking-[0.2em] uppercase text-[var(--page-fg-muted)] hover:text-[var(--nav-fg)] transition-colors"
                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                 aria-pressed={isDark}
               >
-                <span>{isDark ? navbar.darkLabel : navbar.lightLabel}</span>
+                <span className="hidden sm:inline">{isDark ? navbar.darkLabel : navbar.lightLabel}</span>
+                <span className="sm:hidden" aria-hidden="true">
+                  {isDark ? 'D' : 'L'}
+                </span>
                 <span
                   className={`relative inline-flex h-5 w-9 items-center rounded-full px-0.5 transition-colors duration-300 ${
                     isDark ? 'bg-white/20' : 'bg-black/15'

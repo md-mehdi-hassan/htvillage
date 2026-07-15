@@ -2,8 +2,9 @@ import { useEffect, useRef } from 'react'
 import { ecosystem } from '../../data/content'
 import { gsap, registerGsapPlugins } from '../../lib/gsapConfig'
 
-/** Vertical slots the cards rotate through (px) */
-const Y_SLOTS = [-56, 12, 64]
+/** Vertical slots — desktop / tablet drift; mobile stays flatter */
+const Y_SLOTS_DESKTOP = [-56, 12, 64]
+const Y_SLOTS_MOBILE = [0, 0, 0]
 const SWAP_MS = 3200
 
 export default function Ecosystem() {
@@ -25,11 +26,14 @@ export default function Ecosystem() {
     let timer = 0
     let cycling = false
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isMobile = () => window.innerWidth < 640
+    const slots = () => (isMobile() ? Y_SLOTS_MOBILE : Y_SLOTS_DESKTOP)
 
     const applySlots = (animate) => {
+      const Y_SLOTS = slots()
       cards.forEach((card, i) => {
         const slot = Y_SLOTS[(i + phase) % Y_SLOTS.length]
-        if (animate) {
+        if (animate && !isMobile()) {
           gsap.to(card, {
             y: slot,
             duration: 1.15,
@@ -43,11 +47,11 @@ export default function Ecosystem() {
     }
 
     const startCycle = () => {
-      if (cycling || reduceMotion) return
+      if (cycling || reduceMotion || isMobile()) return
       cycling = true
       applySlots(false)
       timer = window.setInterval(() => {
-        phase = (phase + 1) % Y_SLOTS.length
+        phase = (phase + 1) % slots().length
         applySlots(true)
       }, SWAP_MS)
     }
@@ -76,7 +80,7 @@ export default function Ecosystem() {
       )
 
       if (reduceMotion) {
-        gsap.set(cards, { opacity: 1, y: (i) => Y_SLOTS[i % Y_SLOTS.length], scale: 1 })
+        gsap.set(cards, { opacity: 1, y: (i) => slots()[i % slots().length], scale: 1 })
         gsap.set(images, { scale: 1, yPercent: 0 })
         gsap.set(labels, { opacity: 1, y: 0 })
         return
@@ -84,9 +88,9 @@ export default function Ecosystem() {
 
       gsap.set(cards, {
         opacity: 0,
-        y: 110,
-        scale: 0.9,
-        rotateX: 8,
+        y: isMobile() ? 48 : 110,
+        scale: 0.94,
+        rotateX: isMobile() ? 0 : 8,
         transformOrigin: '50% 85%',
         force3D: true,
       })
@@ -110,10 +114,10 @@ export default function Ecosystem() {
           cards,
           {
             opacity: 1,
-            y: (i) => Y_SLOTS[i % Y_SLOTS.length],
+            y: (i) => slots()[i % slots().length],
             scale: 1,
             rotateX: 0,
-            stagger: 0.14,
+            stagger: isMobile() ? 0.08 : 0.14,
             ease: 'none',
             duration: 1,
           },
@@ -162,23 +166,23 @@ export default function Ecosystem() {
     <section
       id={ecosystem.id}
       ref={sectionRef}
-      className="bg-ink-950 section-pad pt-16 pb-28 lg:pt-24 lg:pb-36 overflow-hidden [perspective:1200px]"
+      className="bg-ink-950 section-pad pt-12 pb-16 sm:pt-16 sm:pb-24 lg:pt-24 lg:pb-36 overflow-hidden [perspective:1200px]"
     >
       <div className="container-max relative">
         <h2
           data-eco-title
-          className="pointer-events-none relative z-20 mb-6 sm:mb-8 font-display text-[clamp(3.5rem,12vw,9rem)] font-medium tracking-wide leading-[0.9] text-outline will-change-transform"
+          className="pointer-events-none relative z-20 mb-5 sm:mb-8 font-display text-[clamp(2.5rem,14vw,9rem)] font-medium tracking-wide leading-[0.9] text-outline will-change-transform"
         >
           {ecosystem.heading}
         </h2>
 
         <div
           data-eco-grid
-          className="relative z-10 grid gap-4 sm:grid-cols-3 sm:items-start pt-2 pb-16 sm:pb-20"
+          className="relative z-10 grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3 sm:items-start pt-1 pb-8 sm:pb-16 lg:pb-20"
         >
           {ecosystem.cards.map((card) => (
             <div key={card.id} data-eco-card className="will-change-transform [transform-style:preserve-3d]">
-              <article className="group relative aspect-[4/5] overflow-hidden bg-ink-800">
+              <article className="group relative aspect-[16/10] sm:aspect-[4/5] overflow-hidden bg-ink-800">
                 <img
                   data-eco-img
                   src={card.image}
@@ -191,7 +195,7 @@ export default function Ecosystem() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <h3
                   data-eco-label
-                  className="absolute bottom-5 left-4 right-4 font-display text-xl sm:text-2xl font-medium tracking-wide text-white will-change-transform"
+                  className="absolute bottom-4 left-3 right-3 sm:bottom-5 sm:left-4 sm:right-4 font-display text-lg sm:text-xl lg:text-2xl font-medium tracking-wide text-white will-change-transform"
                 >
                   {card.title}
                 </h3>

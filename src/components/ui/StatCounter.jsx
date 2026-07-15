@@ -50,7 +50,7 @@ export default function StatCounter({
     <div ref={rootRef} className={`${className}`}>
       <div
         ref={numRef}
-        className="font-display text-3xl sm:text-4xl font-medium text-white tracking-wide"
+        className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-white tracking-wide"
       >
         {prefix}0{suffix}
       </div>

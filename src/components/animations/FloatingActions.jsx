@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSmoothScroll } from './smoothScrollContext'
+import { useTheme } from '../../context/ThemeContext'
 
 export default function FloatingActions() {
   const lenisRef = useSmoothScroll()
+  const { isDark } = useTheme()
   const [progress, setProgress] = useState(0)
   const [atTop, setAtTop] = useState(true)
   const ringRef = useRef(null)
@@ -43,22 +45,29 @@ export default function FloatingActions() {
   const dash = 2 * Math.PI * 16
   const offset = dash * (1 - progress)
 
+  const trackStroke = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(18,18,18,0.18)'
+  const progressStroke = isDark ? 'rgba(255,255,255,0.85)' : 'rgba(18,18,18,0.9)'
+
   return (
-    <div className="fixed bottom-6 right-5 z-[60] flex flex-col items-center gap-3">
+    <div className="fixed bottom-4 right-3 sm:bottom-6 sm:right-5 z-[60] flex flex-col items-center gap-3 safe-bottom">
       <button
         type="button"
         onClick={onClick}
-        className="relative h-11 w-11 rounded-full border border-white/30 bg-ink-900/70 backdrop-blur flex items-center justify-center text-white/85 hover:text-white hover:border-white/60 transition-colors"
+        className={`relative h-10 w-10 sm:h-11 sm:w-11 rounded-full border backdrop-blur flex items-center justify-center transition-colors ${
+          isDark
+            ? 'border-white/30 bg-ink-900/70 text-white/85 hover:text-white hover:border-white/60'
+            : 'border-black/25 bg-white/80 text-[#121212] hover:text-black hover:border-black/50'
+        }`}
         aria-label={atTop ? 'Scroll down' : 'Back to top'}
       >
         <svg ref={ringRef} className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 44 44" aria-hidden="true">
-          <circle cx="22" cy="22" r="16" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
+          <circle cx="22" cy="22" r="16" fill="none" stroke={trackStroke} strokeWidth="1.5" />
           <circle
             cx="22"
             cy="22"
             r="16"
             fill="none"
-            stroke="rgba(255,255,255,0.85)"
+            stroke={progressStroke}
             strokeWidth="1.5"
             strokeDasharray={dash}
             strokeDashoffset={offset}

@@ -156,7 +156,7 @@ export default function ProjectsStrip() {
     >
       <div className="section-pad container-max mb-5 flex items-end justify-between gap-4">
         <ScrollReveal>
-          <h2 className="text-outline font-display text-4xl sm:text-5xl font-medium tracking-wide">
+          <h2 className="text-outline font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-wide">
             {projectsStrip.heading}
           </h2>
         </ScrollReveal>
@@ -172,7 +172,7 @@ export default function ProjectsStrip() {
             <article
               key={`${item.id}-${index}`}
               data-project-card
-              className="relative shrink-0 w-[52vw] sm:w-[30vw] lg:w-[18vw] xl:w-[16vw] aspect-[3/4] overflow-hidden bg-ink-800 group will-change-transform"
+              className="relative shrink-0 w-[68vw] sm:w-[38vw] md:w-[28vw] lg:w-[20vw] xl:w-[17vw] aspect-[3/4] overflow-hidden bg-ink-800 group will-change-transform"
             >
               <img
                 data-project-img

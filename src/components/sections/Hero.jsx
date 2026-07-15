@@ -29,8 +29,9 @@ export default function Hero() {
 
     const targetScale = () => {
       const w = media.offsetWidth || 1
-      // Full viewport bleed (slight overshoot kills subpixel side slits)
-      return (window.innerWidth / w) * 1.02
+      const h = media.offsetHeight || 1
+      // Cover viewport on all breakpoints (width + height)
+      return Math.max(window.innerWidth / w, window.innerHeight / h) * 1.02
     }
 
     const ctx = gsap.context(() => {
@@ -53,7 +54,7 @@ export default function Hero() {
           id: 'hero-grow',
           trigger: root,
           start: 'top top',
-          end: '+=130%',
+          end: () => (window.innerWidth < 768 ? '+=85%' : window.innerWidth < 1024 ? '+=110%' : '+=130%'),
           scrub: 0.75,
           pin: true,
           pinSpacing: true,
@@ -118,11 +119,13 @@ export default function Hero() {
     const refresh = () => ScrollTrigger.refresh()
     const t1 = window.setTimeout(refresh, 80)
     const t2 = window.setTimeout(refresh, 400)
+    window.addEventListener('resize', refresh)
 
     return () => {
       window.clearInterval(timer)
       window.clearTimeout(t1)
       window.clearTimeout(t2)
+      window.removeEventListener('resize', refresh)
       ScrollTrigger.getById('hero-grow')?.kill()
       ctx.revert()
     }
@@ -134,13 +137,13 @@ export default function Hero() {
     <section
       id="hero"
       ref={rootRef}
-      className="relative z-10 bg-ink-950 min-h-screen section-pad pt-28 pb-16 flex flex-col overflow-x-hidden"
+      className="relative z-10 bg-ink-950 min-h-[100svh] section-pad pt-24 sm:pt-28 pb-10 sm:pb-16 flex flex-col overflow-x-hidden"
     >
       <div
         ref={titleRef}
-        className="container-max flex flex-col items-center w-full shrink-0 will-change-transform"
+        className="container-max flex flex-col items-center w-full shrink-0 will-change-transform px-1"
       >
-        <h1 className="text-center font-display font-extralight text-[clamp(2rem,5.8vw,4.75rem)] tracking-hero text-white leading-[1.25] pb-1">
+        <h1 className="text-center font-display font-extralight text-[clamp(1.55rem,6.2vw,4.75rem)] tracking-[0.08em] sm:tracking-hero text-white leading-[1.25] pb-1">
           {chars.map((ch, i) => (
             <span
               key={`${ch}-${i}`}
@@ -154,14 +157,14 @@ export default function Hero() {
         </h1>
       </div>
 
-      <div className="mt-10 sm:mt-14 flex-1 flex items-center justify-center w-full min-h-0">
+      <div className="mt-6 sm:mt-10 lg:mt-14 flex-1 flex items-center justify-center w-full min-h-0">
         <div
           ref={mediaRef}
           className="relative mx-auto w-full max-w-5xl will-change-transform"
         >
           <div
             ref={stageRef}
-            className="relative w-full aspect-[16/9] overflow-hidden bg-ink-800"
+            className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] overflow-hidden bg-ink-800"
           >
             {hero.images.map((image) => (
               <img
