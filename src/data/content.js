@@ -83,6 +83,17 @@ export const featured = {
   eyebrow: 'FEATURED PROJECTS',
   /** Continuous background (YouTube id) */
   backgroundVideoId: 'cpbU0qMlIWk',
+  /** Inset frame gallery — auto-rotates */
+  insetGallery: [
+    img.campus,
+    img.robotics,
+    img.aiLab,
+    img.biophilic,
+    img.waterfront,
+    img.solar,
+    img.workspace,
+    img.cityAerial,
+  ],
   slides: [
     {
       id: 'masterplan',

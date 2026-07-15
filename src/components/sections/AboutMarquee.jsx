@@ -36,7 +36,7 @@ export default function AboutMarquee() {
   }, [])
 
   return (
-    <section id={about.id} className="bg-ink-950 section-pad py-20 lg:py-28 overflow-hidden">
+    <section id={about.id} className="bg-ink-950 section-pad pt-20 lg:pt-28 pb-2 lg:pb-3 overflow-hidden">
       <div className="container-max">
         <ScrollReveal className="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
           <div className="lg:col-span-4">
@@ -59,7 +59,7 @@ export default function AboutMarquee() {
         </ScrollReveal>
       </div>
 
-      <div className="mt-16 lg:mt-24 relative">
+      <div className="mt-8 lg:mt-10 relative">
         <div className="flex w-max animate-marquee whitespace-nowrap">
           <span className="text-outline-lg font-display text-[clamp(3rem,9vw,7rem)] font-medium tracking-[0.08em] uppercase pr-8">
             {loop}

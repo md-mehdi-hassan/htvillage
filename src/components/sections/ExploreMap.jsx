@@ -21,7 +21,7 @@ export default function ExploreMap() {
   const selected = exploreMap.markers.find((m) => m.id === activeMarker)
 
   return (
-    <section id={exploreMap.id} className="relative bg-ink-950 section-pad py-16 lg:py-24 overflow-hidden">
+    <section id={exploreMap.id} className="relative bg-ink-950 section-pad mt-16 lg:mt-24 pt-10 lg:pt-14 pb-16 lg:pb-24 overflow-hidden">
       <div
         className="pointer-events-none absolute inset-y-10 left-0 w-1/4 opacity-[0.08]"
         aria-hidden="true"

@@ -20,8 +20,8 @@ export default function App() {
           <Navbar />
           <main>
             <Hero />
-            <FeaturedProjects />
             <AboutMarquee />
+            <FeaturedProjects />
             <ProjectsStrip />
             <ExploreMap />
             <Ecosystem />

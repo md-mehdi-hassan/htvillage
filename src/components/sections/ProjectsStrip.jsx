@@ -152,11 +152,11 @@ export default function ProjectsStrip() {
     <section
       id={projectsStrip.id}
       ref={sectionRef}
-      className="bg-ink-950 py-16 lg:py-24 overflow-hidden"
+      className="bg-ink-950 pt-16 lg:pt-20 pb-4 lg:pb-6 overflow-hidden"
     >
-      <div className="section-pad container-max mb-8 flex items-end justify-between gap-4">
+      <div className="section-pad container-max mb-5 flex items-end justify-between gap-4">
         <ScrollReveal>
-          <h2 className="text-outline font-display text-5xl sm:text-7xl font-medium tracking-wide">
+          <h2 className="text-outline font-display text-4xl sm:text-5xl font-medium tracking-wide">
             {projectsStrip.heading}
           </h2>
         </ScrollReveal>
@@ -165,14 +165,14 @@ export default function ProjectsStrip() {
       <div className="relative overflow-hidden px-5 sm:px-8 lg:px-14 xl:px-20">
         <div
           ref={trackRef}
-          className="flex w-max gap-4 will-change-transform origin-center"
+          className="flex w-max gap-3 will-change-transform origin-center"
           aria-label="Projects carousel"
         >
           {loopItems.map((item, index) => (
             <article
               key={`${item.id}-${index}`}
               data-project-card
-              className="relative shrink-0 w-[72vw] sm:w-[42vw] lg:w-[28vw] aspect-[3/4] overflow-hidden bg-ink-800 group will-change-transform"
+              className="relative shrink-0 w-[52vw] sm:w-[30vw] lg:w-[18vw] xl:w-[16vw] aspect-[3/4] overflow-hidden bg-ink-800 group will-change-transform"
             >
               <img
                 data-project-img
@@ -185,7 +185,7 @@ export default function ProjectsStrip() {
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-              <h3 className="absolute bottom-6 left-5 right-5 font-display text-2xl sm:text-3xl font-medium tracking-wide text-white">
+              <h3 className="absolute bottom-4 left-3 right-3 font-display text-lg sm:text-xl font-medium tracking-wide text-white">
                 {item.title}
               </h3>
             </article>
