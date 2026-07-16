@@ -7,7 +7,7 @@ export default function Insights() {
     <section id={insights.id} className="bg-ink-900 section-pad pt-8 sm:pt-12 lg:pt-16 pb-14 sm:pb-20 lg:pb-28">
       <div className="container-max -mt-2 sm:-mt-4">
         <ScrollReveal className="max-w-2xl">
-          <p className="text-[11px] tracking-[0.28em] uppercase text-olive-400">{insights.eyebrow}</p>
+          <p className="text-[11px] tracking-[0.28em] uppercase text-[#3e8914]">{insights.eyebrow}</p>
           <h2 className="mt-4 font-display text-2xl sm:text-4xl lg:text-5xl font-medium text-white tracking-wide">
             {insights.heading}
           </h2>

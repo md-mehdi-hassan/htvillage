@@ -19,12 +19,12 @@ export default function Connect() {
                 >
                   <div>
                     <div className="flex items-center gap-3">
-                      <span className="text-base sm:text-xl font-light" style={{ color: '#6a040f' }}>
+                      <span className="text-base sm:text-xl font-light" style={{ color: '#3e8914' }}>
                         {cat.title}
                       </span>
                       <span
                         className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        style={{ color: 'rgba(106, 4, 15, 0.8)' }}
+                        style={{ color: 'rgba(62, 137, 20, 0.8)' }}
                       >
                         ↗
                       </span>

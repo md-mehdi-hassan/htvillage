@@ -20,8 +20,6 @@ export default function Footer() {
   }
 
   const navLinks = [...footer.quickLinks.links, ...footer.projects.links]
-  const navLeft = navLinks.slice(0, Math.ceil(navLinks.length / 2))
-  const navRight = navLinks.slice(Math.ceil(navLinks.length / 2))
 
   return (
     <footer
@@ -34,109 +32,80 @@ export default function Footer() {
         style={{ backgroundColor: CORE, color: OFF_WHITE }}
       >
         <div className="container-max">
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-10 items-start">
-            <div className="lg:col-span-5">
+          <div className="grid gap-10 sm:gap-12 lg:grid-cols-4 lg:gap-10 items-start">
+            <div>
               <p className="text-[11px] tracking-[0.22em] uppercase opacity-45">
                 {footer.quickLinks.title}
               </p>
-              <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
-                <ul className="space-y-3">
-                  {navLeft.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        onClick={(e) => go(e, link.href)}
-                        className="footer-link-nav"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                <ul className="space-y-3">
-                  {navRight.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        onClick={(e) => go(e, link.href)}
-                        className="footer-link-nav"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+              <ul className="mt-5 space-y-3">
+                {navLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => go(e, link.href)}
+                      className="footer-link-nav"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-[11px] tracking-[0.22em] uppercase opacity-45">
+                {footer.email.label}
+              </p>
+              <a href={`mailto:${footer.email.value}`} className="footer-link-meta mt-3 block">
+                {footer.email.value}
+              </a>
+              <p className="mt-6 text-[11px] tracking-[0.22em] uppercase opacity-45">
+                {footer.hotline.label}
+              </p>
+              <a
+                href={`tel:${footer.hotline.value.replace(/\s/g, '')}`}
+                className="footer-link-meta mt-2 block"
+              >
+                {footer.hotline.value}
+              </a>
+              <p className="mt-4 text-[11px] tracking-[0.22em] uppercase opacity-45">
+                {footer.sales.label}
+              </p>
+              <a
+                href={`tel:${footer.sales.value.replace(/\s/g, '')}`}
+                className="footer-link-meta mt-2 block"
+              >
+                {footer.sales.value}
+              </a>
+            </div>
+
+            <div>
+              <p className="text-[11px] tracking-[0.22em] uppercase opacity-45">
+                {footer.address.label}
+              </p>
+              <div className="mt-3 space-y-1 text-base sm:text-lg font-light leading-relaxed opacity-90">
+                {footer.address.lines.map((line) => (
+                  <div key={line}>{line}</div>
+                ))}
               </div>
             </div>
 
-            <div className="lg:col-span-4 grid gap-10 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-              <div>
-                <p className="text-[11px] tracking-[0.22em] uppercase opacity-45">
-                  {footer.email.label}
-                </p>
-                <a href={`mailto:${footer.email.value}`} className="footer-link-meta mt-3 block">
-                  {footer.email.value}
-                </a>
-                <p className="mt-6 text-[11px] tracking-[0.22em] uppercase opacity-45">
-                  {footer.hotline.label}
-                </p>
-                <a
-                  href={`tel:${footer.hotline.value.replace(/\s/g, '')}`}
-                  className="footer-link-meta mt-2 block"
-                >
-                  {footer.hotline.value}
-                </a>
-                <p className="mt-4 text-[11px] tracking-[0.22em] uppercase opacity-45">
-                  {footer.sales.label}
-                </p>
-                <a
-                  href={`tel:${footer.sales.value.replace(/\s/g, '')}`}
-                  className="footer-link-meta mt-2 block"
-                >
-                  {footer.sales.value}
-                </a>
+            <div>
+              <p className="text-[11px] tracking-[0.22em] uppercase opacity-45">Follow Us</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {footer.socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    className="footer-social"
+                    aria-label={s.label}
+                  >
+                    <SocialIcon type={s.icon} />
+                  </a>
+                ))}
               </div>
 
-              <div>
-                <p className="text-[11px] tracking-[0.22em] uppercase opacity-45">
-                  {footer.address.label}
-                </p>
-                <div className="mt-3 space-y-1 text-base sm:text-lg font-light leading-relaxed opacity-90">
-                  {footer.address.lines.map((line) => (
-                    <div key={line}>{line}</div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-3 lg:justify-self-end w-full lg:max-w-[220px]">
-              <div className="flex items-start justify-between gap-4 lg:flex-col lg:items-end">
-                <div className="lg:w-full lg:text-right">
-                  <p className="text-[11px] tracking-[0.22em] uppercase opacity-45">Follow Us</p>
-                  <div className="mt-4 flex flex-wrap gap-2 lg:justify-end">
-                    {footer.socials.map((s) => (
-                      <a
-                        key={s.label}
-                        href={s.href}
-                        className="footer-social"
-                        aria-label={s.label}
-                      >
-                        <SocialIcon type={s.icon} />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                <div
-                  className="footer-badge shrink-0 h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem] rounded-full flex flex-col items-center justify-center text-center"
-                  aria-hidden="true"
-                >
-                  <span className="text-[9px] tracking-[0.14em] uppercase opacity-70 leading-none">ISO</span>
-                  <span className="mt-1 text-xs font-medium leading-none opacity-95">27001</span>
-                </div>
-              </div>
-
-              <p className="mt-8 text-sm font-light leading-relaxed lg:text-right opacity-55">
+              <p className="mt-8 text-sm font-light leading-relaxed opacity-55">
                 {footer.description}
               </p>
             </div>

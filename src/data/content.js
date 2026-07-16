@@ -138,14 +138,14 @@ export const about = {
   id: 'about',
   image: img.workspace,
   paragraph:
-    'Our campus portfolio is a mark of distinction. Featuring South Asia’s most selective smart-city developments, we promise investors and partners an unmatched level of infrastructure and service. Our success is built on strong standards and a keen eye for detail — embodying technology, luxury, and excellence.',
+    'Our campus portfolio is a mark of distinction. Featuring South Asia’s most selective smart-city developments, we promise investors and partners an unmatched level of infrastructure and service. Our success is built on strong standards and a keen eye for detail, embodying technology, luxury, and excellence.',
   marquee:
     'PRIME LOCATIONS · LEADING CAMPUS · AI ECOSYSTEM · SMART BANGLADESH 2041 · RENEWABLE GRID · ',
 }
 
 export const projectsStrip = {
   id: 'innovation',
-  heading: 'PROJECTS',
+  heading: 'FACILITIES',
   items: [
     {
       id: 'robotics',
@@ -177,7 +177,7 @@ export const projectsStrip = {
 
 export const exploreMap = {
   id: 'workspace',
-  heading: 'LANDSCAPE',
+  heading: 'WORKSPACE',
   exploreLabel: 'EXPLORE',
   backgroundVideo: '/assets/videos/landscape-campus.mp4',
   filters: [
@@ -229,7 +229,7 @@ export const insights = {
   eyebrow: 'DATA INSIGHTS & DIAGNOSTICS',
   heading: 'Data Integration & AI Analytics',
   paragraph:
-    'Empowering businesses through real-time analytics — a unified view of total power consumption, grid load, and district diagnostics across High-Tech Village Dhaka.',
+    'Empowering businesses through real-time analytics, a unified view of total power consumption, grid load, and district diagnostics across High-Tech Village Dhaka.',
   leftCard: {
     image: img.solar,
     title: 'Total Power Consumption & Grid Load',
@@ -268,7 +268,7 @@ export const footer = {
   id: 'footer',
   brand: 'HTVillage',
   description:
-    'The heart of South Asia’s digital revolution — a high-tech campus integrating innovation, sustainable living, and world-class workspace in Dhaka, Bangladesh.',
+    'The heart of South Asia’s digital revolution, a high-tech campus integrating innovation, sustainable living, and world-class workspace in Dhaka, Bangladesh.',
   quickLinks: {
     title: 'Quick Links',
     links: [
@@ -282,12 +282,7 @@ export const footer = {
   },
   projects: {
     title: 'Our Projects',
-    links: [
-      { label: 'Masterplan', href: '#featured' },
-      { label: 'Research Hub', href: '#innovation' },
-      { label: 'Smart Living', href: '#ecosystem' },
-      { label: 'Sustainability', href: '#about' },
-    ],
+    links: [],
   },
   hotline: { label: 'Hotline', value: '+880 1711 000 000' },
   sales: { label: 'Sales', value: '+880 1711 000 000' },
