@@ -2,9 +2,8 @@ import { footer } from '../../data/content'
 import { useSmoothScroll } from '../animations/smoothScrollContext'
 import SocialIcon from '../ui/SocialIcon'
 
-const CORE = '#6a040f'
-/** Darker strip than secondary #9d0208 */
-const STRIP = '#4a0106'
+const CORE = '#143601'
+const STRIP = '#3e8914'
 const OFF_WHITE = '#f4f1ea'
 
 export default function Footer() {
