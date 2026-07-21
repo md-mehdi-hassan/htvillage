@@ -7,6 +7,7 @@ import ProjectsStrip from './components/sections/ProjectsStrip'
 import ExploreMap from './components/sections/ExploreMap'
 import Ecosystem from './components/sections/Ecosystem'
 import Insights from './components/sections/Insights'
+import Leadership from './components/sections/Leadership'
 import Connect from './components/sections/Connect'
 import SmoothScrollProvider from './components/animations/SmoothScrollProvider'
 import FloatingActions from './components/animations/FloatingActions'
@@ -26,6 +27,7 @@ export default function App() {
             <ExploreMap />
             <Ecosystem />
             <Insights />
+            <Leadership />
             <Connect />
           </main>
           <Footer />

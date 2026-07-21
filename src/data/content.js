@@ -264,6 +264,36 @@ export const connect = {
   ],
 }
 
+export const leadership = {
+  id: 'leadership',
+  eyebrow: 'LEADERSHIP & ADVISORY',
+  heading: 'The people behind the vision',
+}
+
+export const leadershipTeam = [
+  {
+    id: 'hasib-jamal',
+    name: 'MD Al Hasib Jamal',
+    title: 'Industrialist | Investor | Community & Political Leader',
+    bio: "With over three decades of experience across manufacturing, investment, and technology, Al Hasib Jamal leads business growth as Managing Director of Koyo Sweater Limited and Goldman Assets Limited, and serves as Director of Time Research & Innovation Ltd, UK, driving strategic partnerships and innovation initiatives that connect Bangladesh's industrial ambitions with global markets.",
+    image: '/assets/images/team/hasib-jamal.jpg',
+  },
+  {
+    id: 'shah-siddiqui',
+    name: 'Dr Shah Siddiqui, PhD',
+    title: 'Senior AI Tech Consultant | Enterprise Solutions | ERP & Digital Transformation Leader',
+    bio: 'A PhD-level AI and enterprise technology consultant, Dr Siddiqui combines academic research expertise with hands-on delivery of AI platforms, automation, and digital transformation strategy, leading AI transformation initiatives at Time Research & Innovation and advising enterprise clients on scalable, intelligent systems.',
+    image: '/assets/images/team/shah-siddiqui.jpg',
+  },
+  {
+    id: 'chris-silverwood',
+    name: 'Chris Silverwood',
+    title: 'Freelance Sales Coach | Fractional General Manager | Sales Director',
+    bio: "An entrepreneurial strategic leader with 25+ years' experience scaling businesses across FMCG, healthcare, retail, and marine industries, Chris specialises in sales transformation, operational turnaround, and building high-performance teams across global markets.",
+    image: '/assets/images/team/chris-silverwood.jpg',
+  },
+]
+
 export const footer = {
   id: 'footer',
   brand: 'HTVillage',
